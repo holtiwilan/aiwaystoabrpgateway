@@ -74,7 +74,7 @@ options:
                         Optional: Your Homeassistent LONG LIVED ACCESS TOKEN
                         
   -l DEBUGLEVEL, --debuglevel DEBUGLEVEL
-                        Debuglevel
+                        Debuglevel - Use -1 to log to sdtout - for Dockerlogs
 # Docker:
 There exist a Docker Container 
 holtiwilan/aiwaystoabrpgateway:latest
