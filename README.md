@@ -6,31 +6,21 @@ Getting the needed Data out of the Aiways App
 
 Unfortunately there isn’t an easy way.
 Here is, what worked for me. But it is not for the faint hearted:
+Use PCAPdroid on Android to capture the communication of the Aiways app. This helper app does NOT require root access.
+Activate TLS-Decryption in PCAPdroid and follow the wizard to generate a certificate and install it in Android. The guide (https://emanuele-.github.io/PCAPdroid/tls_decryption) can help you to test the decryption.
+Choose HTTP-Server as traffic dump and the Aiways app as the target app.
+Start the dump with the play icon.
+Open the Aiways app and navigate to the car data.
+Back in PCAPdroid stop the dump and check the registered traffic. There should be a bunch of requests. Most of them contain the header data that you are interested in:
+- token
+- registerid
+- deviceid
+- vin
+- userId
 
-    • Use PCAPdroid on Android to capture the communication of the Aiways app. This helper app does NOT require root access.
-    
-    • Activate TLS-Decryption in PCAPdroid and follow the wizard to generate a certificate and install it in Android. The guide (https://emanuele-f.github.io/PCAPdroid/tls_decryption) can help you to test the decryption.
-    
-    • Choose HTTP-Server as traffic dump and the Aiways app as the target app.
-      Start the dump with the play icon.
-      
-    • Open the Aiways app and navigate to the car data.
-    
-    • Back in PCAPdroid stop the dump and check the registered traffic. There should be a bunch of requests. Most of them contain the header data that you are interested in:
-    
-        ◦ token
-        
-        ◦ registerid
-        
-        ◦ deviceid
-        
-        ◦ vin
-        
-        ◦ userId
-        
-        
-    • These can possible expire at any time (though they were stable for me for quite some time now. If they expire you have to capture them again for an update.
-    
+These can possible expire at any time (though they were stable for me for quite some time now. If they expire you have to capture them again for an update.
+
+    USAGE:
     
 Read Aiways Data and send it to ABRP and/or Homeassistant.
 
