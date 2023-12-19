@@ -80,12 +80,21 @@ There exist a Docker Container
 holtiwilan/aiwaystoabrpgateway:latest
 
 To use the container you have to set the following ENV Variables to pass them to the script:
+
 -VIN
+
 -TOKEN
+
 -DEVICEID
+
 -REGISTERID
+
 -USERID
+
 -ABRPTOKEN (Optional, if not set, nothing will be send to ABRP)
+
 -HAURL (Optional, if not set, nothing will be send to Homeassistent)
+
 -HATOKEN (Optional, if not set, nothing will be send to Homeassistent)
+
 -DEBUGLEVEL
