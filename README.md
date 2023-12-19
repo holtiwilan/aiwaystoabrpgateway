@@ -20,6 +20,18 @@ Back in PCAPdroid stop the dump and check the registered traffic. There should b
 
 These can possible expire at any time (though they were stable for me for quite some time now. If they expire you have to capture them again for an update.
 
+# Homeassistant
+If the Homeassistant URL and Token is set, the Script will send the following Data to HA entitys
+- soc to entity_id='sensor.Aiways_U5_SOC'
+- drivingRange to entity_id='sensor.Aiways_U5_RANGE'
+- speed to entity_id='sensor.Aiways_U5_SPEED'
+- chargeSts to entity_id='sensor.Aiways_U5_Charge_Sts'
+
+# A Better Route Planner
+If the ABRP Token is set, the Script will send soc, drivingRange, speed and chargeSts to ABRP
+To get a USER TOKEN from ABRP do the following:
+Inside the ABRP (web)app, navigate to your car settings and use the "generic" card (last one at the very bottom) to generate your user token. Make a note of that token and keep it to yourself.
+
 # USAGE:
     
 Read Aiways Data and send it to ABRP and/or Homeassistant.
@@ -53,3 +65,17 @@ options:
                         
   -l DEBUGLEVEL, --debuglevel DEBUGLEVEL
                         Debuglevel
+# Docker:
+There exist a Docker Container 
+holtiwilan/aiwaystoabrpgateway:latest
+
+To use the container you have to set the following ENV Variables to pass them to the script:
+-VIN
+-TOKEN
+-DEVICEID
+-REGISTERID
+-USERID
+-ABRPTOKEN (Optional, if not set, nothing will be send to ABRP)
+-HAURL (Optional, if not set, nothing will be send to Homeassistent)
+-HATOKEN (Optional, if not set, nothing will be send to Homeassistent)
+-DEBUGLEVEL
