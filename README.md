@@ -1,5 +1,10 @@
-# aiwaystoabrpgateway
+# Aiways to ABRP Gateway
 This is a python Gateway to Read Data from the Aiways API and send it to ABRP and / or Homeassistant
+The Project is inspired by:
+
+OpenWB project - https://github.com/snaptec/openWB/blob/master/modules/soc_aiways/aiways_get_soc.py
+
+saic-python-mqtt-gateway - https://github.com/SAIC-iSmart-API/saic-python-mqtt-gateway
 
 # Getting the needed Data out of the Aiways App
 - Source: https://community.home-assistant.io/t/read-aiways-u5-state-of-charge/466441/3
@@ -26,6 +31,10 @@ If the Homeassistant URL and Token is set, the Script will send the following Da
 - drivingRange to entity_id='sensor.Aiways_U5_RANGE'
 - speed to entity_id='sensor.Aiways_U5_SPEED'
 - chargeSts to entity_id='sensor.Aiways_U5_Charge_Sts'
+
+How to get long lived access token?
+- Go under your profile than logged in, there you can find at the end of the page the option to create long life access tokens.
+
 
 # A Better Route Planner
 If the ABRP Token is set, the Script will send soc, drivingRange, speed and chargeSts to ABRP.
