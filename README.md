@@ -28,7 +28,8 @@ If the Homeassistant URL and Token is set, the Script will send the following Da
 - chargeSts to entity_id='sensor.Aiways_U5_Charge_Sts'
 
 # A Better Route Planner
-If the ABRP Token is set, the Script will send soc, drivingRange, speed and chargeSts to ABRP
+If the ABRP Token is set, the Script will send soc, drivingRange, speed and chargeSts to ABRP.
+
 To get a USER TOKEN from ABRP do the following:
 Inside the ABRP (web)app, navigate to your car settings and use the "generic" card (last one at the very bottom) to generate your user token. Make a note of that token and keep it to yourself.
 
