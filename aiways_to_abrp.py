@@ -101,7 +101,8 @@ def send_to_abrp():
         "lat": 0,
         "lon": 0,
         "is_charging": False,
-        "est_battery_range": vc["drivingRange"]
+        "est_battery_range": vc["drivingRange"],
+        "ext_temp": vc["airconoutsidetemp"]
     }
 
     if vc["chargeSts"] == 1:
