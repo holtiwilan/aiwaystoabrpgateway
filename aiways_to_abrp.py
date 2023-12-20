@@ -2,11 +2,12 @@
 
 # Script to read data from the Aiways API and send them to ABRP
 # Author  : Tim Holzhausen
-# Version : 1.1
+# Version : 1.2
 # Date    : 19.12.2023
 # Based on the OpenWB project - https://github.com/snaptec/openWB/blob/master/modules/soc_aiways/aiways_get_soc.py
 # Changelog:
 # added Homeassistant support
+# changed Homeassistant support to publish all data
 
 import requests
 import argparse
@@ -48,10 +49,9 @@ def send_to_homeassistant():
     logger.info("Schreibe nach HA")
 
     client = Client(HA_URL, HA_TOKEN)
-    client.set_state(State(state=vc["soc"], entity_id='sensor.Aiways_U5_SOC'))
-    client.set_state(State(state=vc["drivingRange"], entity_id='sensor.Aiways_U5_RANGE'))
-    client.set_state(State(state=vc["speed"], entity_id='sensor.Aiways_U5_SPEED'))
-    client.set_state(State(state=vc["chargeSts"], entity_id='sensor.Aiways_U5_Charge_Sts'))
+    for (k, v) in vc.items():
+        sensorname = "sensor.Aiways_" + vin + "_" + k
+        client.set_state(State(state=str(v), entity_id=sensorname))
 
 #########################################################################
 # Request "app/vc/getCondition"                                        #
