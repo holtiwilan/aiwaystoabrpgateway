@@ -26,11 +26,8 @@ Back in PCAPdroid stop the dump and check the registered traffic. There should b
 These can possible expire at any time (though they were stable for me for quite some time now. If they expire you have to capture them again for an update.
 
 # Homeassistant
-If the Homeassistant URL and Token is set, the Script will send the following Data to HA entitys
-- soc to entity_id='sensor.Aiways_U5_SOC'
-- drivingRange to entity_id='sensor.Aiways_U5_RANGE'
-- speed to entity_id='sensor.Aiways_U5_SPEED'
-- chargeSts to entity_id='sensor.Aiways_U5_Charge_Sts'
+If the Homeassistant URL and Token is set, the Script will send all fetched Data to HA entities.
+They names will look like "aiways {your vin} {dataname}"
 
 How to get long lived access token?
 - Go under your profile than logged in, there you can find at the end of the page the option to create long life access tokens.
