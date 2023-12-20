@@ -104,13 +104,21 @@ def send_to_abrp():
         "lon": 0,
         "is_charging": False,
         "est_battery_range": vc["drivingRange"],
-        "ext_temp": vc["airconOutsideTemp"]
+        "ext_temp": vc["airconOutsideTemp"],
+        "is_dcfc": vc["chgConnStsDc"], 
+        "is_parked": False
     }
 
     if vc["chargeSts"] == 1:
         objTLM["is_charging"] = 1
     else:
         objTLM["is_charging"] = 0
+
+    if vc["vehicleSts"] == 2:
+        objTLM["is_parked"] = 1
+    else:
+        objTLM["is_parked"] = 0
+
 
     url = ABRP_URL+"?token=" + ABRP_TOKEN
     headers = {"Authorization": "APIKEY " + ABRP_API_KEY}
