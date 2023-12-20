@@ -2,12 +2,14 @@
 
 # Script to read data from the Aiways API and send them to ABRP
 # Author  : Tim Holzhausen
-# Version : 1.2
-# Date    : 19.12.2023
+# Version : 1.3
+# Date    : 20.12.2023
 # Based on the OpenWB project - https://github.com/snaptec/openWB/blob/master/modules/soc_aiways/aiways_get_soc.py
 # Changelog:
-# added Homeassistant support
-# changed Homeassistant support to publish all data
+    # added Homeassistant support
+    # changed Homeassistant support to publish all data
+    # changed Debuglevel to optional
+
 
 import requests
 import argparse
@@ -143,9 +145,9 @@ if __name__ == "__main__":
     parser.add_argument('-r', '--registerid', help='Your registerid', required=True, action=EnvDefault, envvar='REGISTERID')
     parser.add_argument('-u', '--userId', help='Your userId', required=True, action=EnvDefault, envvar='USERID')
     parser.add_argument('-a', '--abrptoken', help='Optional: Your ABRP Token', required=False, action=EnvDefault, envvar='ABRPTOKEN')
-    parser.add_argument('-g', '--haurl', help='Optional: Your Homeassistent URL', required=False, action=EnvDefault, envvar='HAURL')
-    parser.add_argument('-f', '--hatoken', help='Optional: Your Homeassistent LONG LIVED ACCESS TOKEN', required=False, action=EnvDefault, envvar='HATOKEN')
-    parser.add_argument('-l', '--debuglevel', help='Debuglevel', type = int, required=True, action=EnvDefault, envvar='DEBUGLEVEL')
+    parser.add_argument('-g', '--haurl', help='Optional: Your Homeassistant URL', required=False, action=EnvDefault, envvar='HAURL')
+    parser.add_argument('-f', '--hatoken', help='Optional: Your Homeassistant LONG LIVED ACCESS TOKEN', required=False, action=EnvDefault, envvar='HATOKEN')
+    parser.add_argument('-l', '--debuglevel', help='Optional: Debuglevel (-1 for logging to stdout, 1 for debug to logfile)', type = int, required=False, action=EnvDefault, envvar='DEBUGLEVEL')
     args = parser.parse_args()
     vin = args.vin
     token = args.token
@@ -156,9 +158,13 @@ if __name__ == "__main__":
     HA_URL = args.haurl
     HA_TOKEN = args.hatoken
     ABRP_TOKEN = args.abrptoken
-    if debuglevel < 0: logging.basicConfig(stream=sys.stdout, format='%(asctime)s %(levelname)-8s %(name)-12s %(message)s', level=logging.DEBUG)
-    if debuglevel > 0: logging.basicConfig(filename='aiwaystoabrpgateway.log', format='%(asctime)s %(levelname)-8s %(name)-12s %(message)s', level=logging.DEBUG)
-    else: logging.basicConfig(filename='aiwaystoabrpgateway.log', format='%(asctime)s %(levelname)-8s %(name)-12s %(message)s', level=logging.ERROR)
+    if args.debuglevel is not None:
+        if debuglevel < 0: logging.basicConfig(stream=sys.stdout, format='%(asctime)s %(levelname)-8s %(name)-12s %(message)s', level=logging.DEBUG)
+        if debuglevel > 0: logging.basicConfig(filename='aiwaystoabrpgateway.log', format='%(asctime)s %(levelname)-8s %(name)-12s %(message)s', level=logging.DEBUG)
+        else: logging.basicConfig(filename='aiwaystoabrpgateway.log', format='%(asctime)s %(levelname)-8s %(name)-12s %(message)s', level=logging.ERROR)
+    else:
+        logging.basicConfig(filename='aiwaystoabrpgateway.log', format='%(asctime)s %(levelname)-8s %(name)-12s %(message)s', level=logging.ERROR)
+        
     logger = logging.getLogger("aiways_to_abrp.py")
     
     logger.info("ha url: " + HA_URL)
